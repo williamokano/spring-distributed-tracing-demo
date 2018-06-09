@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+br.udi.william.demos.distributedtracing.commons.config.CommonsConfig

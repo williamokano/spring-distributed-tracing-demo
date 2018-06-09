@@ -9,6 +9,13 @@
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.13.RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <modules>
         <module>customer-web</module>
         <module>catalog-web</module>
@@ -17,10 +24,12 @@
 
     <properties>
         <kotlin.version>1.2.41</kotlin.version>
+        <lombok.version>1.18.0</lombok.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
             <dependency>
                 <groupId>br.udi.william.demos.distributedtracing</groupId>
                 <artifactId>customer-web</artifactId>
@@ -35,6 +44,13 @@
                 <groupId>br.udi.william.demos.distributedtracing</groupId>
                 <artifactId>commons</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- Third Party -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
