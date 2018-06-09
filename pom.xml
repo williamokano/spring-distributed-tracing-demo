@@ -29,6 +29,8 @@
         <liquibase.version>3.5.3</liquibase.version>
         <liquibase.maven.plugin>3.4.1</liquibase.maven.plugin>
         <modelmapper.version>2.0.0</modelmapper.version>
+        <opentracing.version>0.3.2</opentracing.version>
+        <jaeger.core.version>0.29.0</jaeger.core.version>
     </properties>
 
     <dependencyManagement>
@@ -73,6 +75,19 @@
                 <groupId>org.modelmapper</groupId>
                 <artifactId>modelmapper</artifactId>
                 <version>${modelmapper.version}</version>
+            </dependency>
+
+            <!-- Tracing Stuff -->
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>opentracing-spring-web-autoconfigure</artifactId>
+                <version>${opentracing.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jaegertracing</groupId>
+                <artifactId>jaeger-core</artifactId>
+                <version>${jaeger.core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
