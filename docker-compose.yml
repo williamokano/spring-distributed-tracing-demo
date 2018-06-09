@@ -1,0 +1,13 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=bifrost
+
+  jeager:
+    image: jaegertracing/all-in-one
