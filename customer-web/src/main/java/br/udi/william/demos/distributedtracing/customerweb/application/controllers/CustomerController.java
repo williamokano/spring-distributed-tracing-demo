@@ -8,12 +8,12 @@ import br.udi.william.demos.distributedtracing.customerweb.application.services.
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -47,7 +47,7 @@ public class CustomerController implements CustomerAPI {
 
     @ResponseStatus(CREATED)
     @Override
-    public CustomerRepresentation createCustomer(@RequestBody @Validated CustomerRepresentation customer) {
+    public CustomerRepresentation createCustomer(@RequestBody @Valid CustomerRepresentation customer) {
         return CustomerRepresentation.builder()
                 .id(UUID.randomUUID().toString())
                 .build();
@@ -55,7 +55,7 @@ public class CustomerController implements CustomerAPI {
 
     @ResponseStatus(NO_CONTENT)
     @Override
-    public void updateUpdateCustomer(@PathVariable String id, @RequestBody @Validated CustomerRepresentation request) {
+    public void updateUpdateCustomer(@PathVariable String id, @RequestBody @Valid CustomerRepresentation request) {
 
     }
 
