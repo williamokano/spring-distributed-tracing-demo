@@ -28,6 +28,7 @@
         <postgresql.version>42.1.4</postgresql.version>
         <liquibase.version>3.5.3</liquibase.version>
         <liquibase.maven.plugin>3.4.1</liquibase.maven.plugin>
+        <modelmapper.version>2.0.0</modelmapper.version>
     </properties>
 
     <dependencyManagement>
@@ -66,6 +67,12 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-core</artifactId>
                 <version>${liquibase.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

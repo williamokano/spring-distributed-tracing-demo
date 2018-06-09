@@ -1,13 +1,23 @@
 package br.udi.william.demos.distributedtracing.customerweb.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@Configuration
 @SpringBootApplication
+@EnableJpaRepositories("br.udi.william.demos.distributedtracing.customerweb.application")
 @ComponentScan(basePackages = {
         "br.udi.william.demos.distributedtracing.customerweb.application"
 })
+@EntityScan(basePackages = {
+        "br.udi.william.demos.distributedtracing.customerweb.application"
+})
 public class CustomerWebConfig {
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }

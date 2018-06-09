@@ -1,18 +1,13 @@
 package br.udi.william.demos.distributedtracing.commons.commons.customer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Data
 public class CustomerRepresentation {
-    @Getter
     private String id;
-    @Getter
     private String name;
-    @Getter
     private String lastname;
 }
