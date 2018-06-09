@@ -1,13 +1,13 @@
 package br.udi.william.demos.distributedtracing.customerweb.application.controllers;
 
-import br.udi.william.demos.distributedtracing.commons.commons.ResourceValue;
 import br.udi.william.demos.distributedtracing.commons.commons.customer.CustomerAPI;
 import br.udi.william.demos.distributedtracing.commons.commons.customer.CustomerRepresentation;
-import br.udi.william.demos.distributedtracing.commons.commons.exception.NotFoundException;
+import br.udi.william.demos.distributedtracing.customerweb.application.models.Customer;
 import br.udi.william.demos.distributedtracing.customerweb.application.repositories.CustomerRepository;
+import br.udi.william.demos.distributedtracing.customerweb.application.services.CustomerService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,16 +21,12 @@ import java.util.stream.Collectors;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
+@AllArgsConstructor
 public class CustomerController implements CustomerAPI {
 
     private CustomerRepository customerRepository;
     private ModelMapper modelMapper;
-
-    @Autowired
-    CustomerController(CustomerRepository customerRepository, ModelMapper modelMapper) {
-        this.customerRepository = customerRepository;
-        this.modelMapper = modelMapper;
-    }
+    private CustomerService customerService;
 
     @ResponseStatus(OK)
     @Override
@@ -44,10 +40,9 @@ public class CustomerController implements CustomerAPI {
     @ResponseStatus(OK)
     @Override
     public CustomerRepresentation getCustomerById(@PathVariable String id) {
-        throw NotFoundException.of(ResourceValue.builder()
-                .resource("Customer")
-                .value(id)
-                .build());
+        Customer customer = customerService.findCustomerById(id);
+
+        return modelMapper.map(customer, CustomerRepresentation.class);
     }
 
     @ResponseStatus(CREATED)
