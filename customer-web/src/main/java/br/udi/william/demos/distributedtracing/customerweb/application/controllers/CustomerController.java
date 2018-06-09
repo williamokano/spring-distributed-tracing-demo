@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.*;
@@ -48,9 +47,9 @@ public class CustomerController implements CustomerAPI {
     @ResponseStatus(CREATED)
     @Override
     public CustomerRepresentation createCustomer(@RequestBody @Valid CustomerRepresentation customer) {
-        return CustomerRepresentation.builder()
-                .id(UUID.randomUUID().toString())
-                .build();
+        Customer createdCustomer = customerService.createCustomer(modelMapper.map(customer, Customer.class));
+        
+        return modelMapper.map(createdCustomer, CustomerRepresentation.class);
     }
 
     @ResponseStatus(NO_CONTENT)

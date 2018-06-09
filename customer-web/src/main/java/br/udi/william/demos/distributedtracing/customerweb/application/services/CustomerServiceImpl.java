@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
@@ -27,5 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return customer;
+    }
+
+    @Override
+    public Customer createCustomer(Customer customer) {
+        customer.setId(UUID.randomUUID().toString());
+        return customerRepository.save(customer);
     }
 }
