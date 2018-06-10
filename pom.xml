@@ -20,6 +20,7 @@
         <module>customer-web</module>
         <module>catalog-web</module>
         <module>commons</module>
+        <module>order-web</module>
     </modules>
 
     <properties>
