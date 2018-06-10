@@ -14,7 +14,7 @@ open class JaegerOpentracingConfig {
 
         val reporter = Configuration.ReporterConfiguration()
 
-        return Configuration("catalog-web")
+        return Configuration("order-web")
             .withSampler(sampler)
             .withReporter(reporter)
             .tracer
