@@ -2,6 +2,7 @@ package br.udi.william.demos.distributedtracing.commons.commons.order;
 
 import br.udi.william.demos.distributedtracing.commons.commons.customer.CustomerRepresentation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 public class OrderRepresentation {
     private String id;
