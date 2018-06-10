@@ -25,7 +25,7 @@ open class OrderController(
         return orderRepository.findAll().map {
             OrderRepresentation.builder()
                 .id(it.id)
-                .customer(customerAPI.getCustomerById(it.customerId))
+                .customer(customerAPI.getCustomerById("${it.customerId}"))
                 .total(it.price)
                 .items(buildItemsList(it.items))
                 .orderStatus(OrderRepresentation.OrderStatus.valueOf(it.status!!))
