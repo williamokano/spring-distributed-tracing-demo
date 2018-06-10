@@ -17,14 +17,14 @@ public interface CatalogAPI {
     List<ProductRepresentation> getProducts();
 
     @GetMapping("/{id}")
-    ProductRepresentation getProduct(@PathVariable String id);
+    ProductRepresentation getProduct(@PathVariable("id") String id);
 
     @PostMapping
     ProductRepresentation createProduct(@RequestBody @Validated ProductRepresentation product);
 
     @PutMapping("/{id}")
-    void updateProduct(@PathVariable String id, @RequestBody @Validated ProductRepresentation product);
+    void updateProduct(@PathVariable("id") String id, @RequestBody @Validated ProductRepresentation product);
 
     @DeleteMapping("/{id}")
-    void deleteProduct(@PathVariable String id);
+    void deleteProduct(@PathVariable("id") String id);
 }

@@ -1,12 +1,12 @@
 package br.udi.william.demos.distributedtracing.commons.commons.order;
 
+import br.udi.william.demos.distributedtracing.commons.commons.customer.CustomerRepresentation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @NoArgsConstructor
@@ -14,9 +14,8 @@ import java.util.List;
 @Data
 public class OrderRepresentation {
     private String id;
-    @NotEmpty
-    @Size(max = 64)
-    private String customerId;
+    @NotNull
+    private CustomerRepresentation customer;
     @NotEmpty
     private List<OrderItemRepresentation> items;
     @NotNull

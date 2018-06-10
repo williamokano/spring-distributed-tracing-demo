@@ -32,6 +32,8 @@
         <modelmapper.version>2.0.0</modelmapper.version>
         <opentracing.spring.cloud.version>0.1.13</opentracing.spring.cloud.version>
         <jaeger.core.version>0.29.0</jaeger.core.version>
+        <feign.version>1.4.4.RELEASE</feign.version>
+        <feign.jackson.version>9.7.0</feign.jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -89,6 +91,30 @@
                 <groupId>io.jaegertracing</groupId>
                 <artifactId>jaeger-core</artifactId>
                 <version>${jaeger.core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-feign</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign.jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,24 +1,27 @@
 package br.udi.william.demos.distributedtracing.commons.commons.order;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RestController
 @RequestMapping(
         value = "/order",
         consumes = APPLICATION_JSON_VALUE,
         produces = APPLICATION_JSON_VALUE
 )
 public interface OrderAPI {
-    OrderRepresentation getOrder(@PathVariable String id);
+    @GetMapping
+    List<OrderRepresentation> getOrders();
 
-    OrderRepresentation createOrder(@RequestBody @Valid OrderRepresentation orderRepresentation);
+    @GetMapping("/{id}")
+    OrderRepresentation getOrder(@PathVariable("id") String id);
 
-    void cancelOrder(@PathVariable String id);
+    @PostMapping
+    OrderRepresentation createOrder(@RequestBody @Valid OrderCreationRepresentation orderCreationRepresentation);
+
+    @DeleteMapping("/{id}")
+    void cancelOrder(@PathVariable("id") String id);
 }

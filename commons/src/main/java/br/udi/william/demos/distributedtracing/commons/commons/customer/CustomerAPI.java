@@ -17,14 +17,14 @@ public interface CustomerAPI {
     List<CustomerRepresentation> listCustomers();
 
     @GetMapping("/{id}")
-    CustomerRepresentation getCustomerById(@PathVariable String id);
+    CustomerRepresentation getCustomerById(@PathVariable("id") String id);
 
     @PostMapping
     CustomerRepresentation createCustomer(@RequestBody @Validated CustomerRepresentation customer);
 
     @PutMapping("/{id}")
-    void updateUpdateCustomer(@PathVariable String id, @RequestBody @Validated CustomerRepresentation request);
+    void updateUpdateCustomer(@PathVariable("id") String id, @RequestBody @Validated CustomerRepresentation request);
 
     @DeleteMapping("/{id}")
-    void deleteCustomer(@PathVariable String id);
+    void deleteCustomer(@PathVariable("id") String id);
 }
