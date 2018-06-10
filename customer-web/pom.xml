@@ -80,7 +80,7 @@
         <!-- Tracing stuff -->
         <dependency>
             <groupId>io.opentracing.contrib</groupId>
-            <artifactId>opentracing-spring-web-autoconfigure</artifactId>
+            <artifactId>opentracing-spring-cloud</artifactId>
         </dependency>
 
         <dependency>

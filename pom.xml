@@ -29,7 +29,7 @@
         <liquibase.version>3.5.3</liquibase.version>
         <liquibase.maven.plugin>3.4.1</liquibase.maven.plugin>
         <modelmapper.version>2.0.0</modelmapper.version>
-        <opentracing.version>0.3.2</opentracing.version>
+        <opentracing.spring.cloud.version>0.1.13</opentracing.spring.cloud.version>
         <jaeger.core.version>0.29.0</jaeger.core.version>
     </properties>
 
@@ -80,8 +80,8 @@
             <!-- Tracing Stuff -->
             <dependency>
                 <groupId>io.opentracing.contrib</groupId>
-                <artifactId>opentracing-spring-web-autoconfigure</artifactId>
-                <version>${opentracing.version}</version>
+                <artifactId>opentracing-spring-cloud</artifactId>
+                <version>${opentracing.spring.cloud.version}</version>
             </dependency>
 
             <dependency>
