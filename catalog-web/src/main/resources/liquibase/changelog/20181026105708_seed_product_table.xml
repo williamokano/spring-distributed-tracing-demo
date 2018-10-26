@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="20181026105708-1" author="william.okano">
+        <insert tableName="products">
+            <column name="id" value="4fa499e9-3b53-447d-860a-65482fa44eb2"/>
+            <column name="name" value="PLAN A"/>
+            <column name="price" value="2.99"/>
+        </insert>
+        <insert tableName="products">
+            <column name="id" value="67b83c39-6bef-470a-aefc-9c0e742c6cf1"/>
+            <column name="name" value="PLAN B"/>
+            <column name="price" value="5.99"/>
+        </insert>
+        <insert tableName="products">
+            <column name="id" value="83028e0f-a82e-451e-888a-177280cd1878"/>
+            <column name="name" value="Awesome Plan"/>
+            <column name="price" value="9.99"/>
+        </insert>
+        <insert tableName="products">
+            <column name="id" value="6d2362a4-0990-421a-b564-9ed16b03fb71"/>
+            <column name="name" value="The good plan"/>
+            <column name="price" value="15.00"/>
+        </insert>
+        <insert tableName="products">
+            <column name="id" value="104085e6-00d3-4b42-bdac-285ce26c0569"/>
+            <column name="name" value="Oddly expensive plan"/>
+            <column name="price" value="98765.43"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

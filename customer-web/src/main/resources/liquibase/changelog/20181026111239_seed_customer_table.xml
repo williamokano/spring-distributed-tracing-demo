@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="20181026111239-1" author="william.okano">
+        <insert tableName="customers">
+            <column name="id" value="ebe1eb26-293b-4c5e-a2c2-156cf2c244f5"/>
+            <column name="name" value="William"/>
+            <column name="lastname" value="Okano"/>
+        </insert>
+        <insert tableName="customers">
+            <column name="id" value="99795384-9a99-43fd-a005-64ac54fc12b8"/>
+            <column name="name" value="João Victor"/>
+            <column name="lastname" value="Redondo"/>
+        </insert>
+        <insert tableName="customers">
+            <column name="id" value="3aaaf903-df16-480a-a328-cb00d2b9d836"/>
+            <column name="name" value="José"/>
+            <column name="lastname" value="dos Santos"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

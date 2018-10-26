@@ -6,4 +6,5 @@
 
     <include file="classpath:liquibase/changelog/00000000000000_initial_schema.xml"/>
     <include file="classpath:liquibase/changelog/20180609222200_create_product_table.xml"/>
+    <include file="classpath:liquibase/changelog/20181026105708_seed_product_table.xml"/>
 </databaseChangeLog>
