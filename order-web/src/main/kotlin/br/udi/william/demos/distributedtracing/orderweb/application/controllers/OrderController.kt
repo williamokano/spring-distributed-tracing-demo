@@ -33,15 +33,6 @@ open class OrderController(
         }
     }
 
-    private fun buildItemsList(items: List<OrderItem>): List<OrderItemRepresentation> =
-        items.map(this::buildOrderItemRepresentation)
-
-    private fun buildOrderItemRepresentation(orderItem: OrderItem): OrderItemRepresentation =
-        OrderItemRepresentation.builder()
-            .product(catalogAPI.getProduct(orderItem.productId))
-            .quantity(orderItem.quantity)
-            .build()
-
     @ResponseStatus(HttpStatus.OK)
     override fun getOrder(@PathVariable("id") id: String): OrderRepresentation {
         return OrderRepresentation()
@@ -57,4 +48,12 @@ open class OrderController(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    private fun buildItemsList(items: List<OrderItem>): List<OrderItemRepresentation> =
+        items.map(this::buildOrderItemRepresentation)
+
+    private fun buildOrderItemRepresentation(orderItem: OrderItem): OrderItemRepresentation =
+        OrderItemRepresentation.builder()
+            .product(catalogAPI.getProduct(orderItem.productId))
+            .quantity(orderItem.quantity)
+            .build()
 }
