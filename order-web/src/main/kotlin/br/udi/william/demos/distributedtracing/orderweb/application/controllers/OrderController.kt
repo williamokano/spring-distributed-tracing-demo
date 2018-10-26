@@ -1,17 +1,23 @@
 package br.udi.william.demos.distributedtracing.orderweb.application.controllers
 
 import br.udi.william.demos.distributedtracing.commons.commons.catalog.CatalogAPI
+import br.udi.william.demos.distributedtracing.commons.commons.catalog.ProductRepresentation
 import br.udi.william.demos.distributedtracing.commons.commons.customer.CustomerAPI
 import br.udi.william.demos.distributedtracing.commons.commons.order.OrderAPI
 import br.udi.william.demos.distributedtracing.commons.commons.order.OrderCreationRepresentation
 import br.udi.william.demos.distributedtracing.commons.commons.order.OrderItemRepresentation
 import br.udi.william.demos.distributedtracing.commons.commons.order.OrderRepresentation
+import br.udi.william.demos.distributedtracing.commons.commons.order.OrderRepresentation.OrderStatus
+import br.udi.william.demos.distributedtracing.commons.commons.order.OrderRepresentation.builder
+import br.udi.william.demos.distributedtracing.orderweb.application.models.Order
 import br.udi.william.demos.distributedtracing.orderweb.application.models.OrderItem
 import br.udi.william.demos.distributedtracing.orderweb.application.repositories.OrderRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @RestController
 open class OrderController(
@@ -23,12 +29,12 @@ open class OrderController(
     @ResponseStatus(HttpStatus.OK)
     override fun getOrders(): List<OrderRepresentation> {
         return orderRepository.findAll().map {
-            OrderRepresentation.builder()
+            builder()
                 .id(it.id)
                 .customer(customerAPI.getCustomerById(it.customerId))
                 .total(it.price)
                 .items(buildItemsList(it.items))
-                .orderStatus(OrderRepresentation.OrderStatus.valueOf(it.status!!))
+                .orderStatus(OrderStatus.valueOf(it.status!!))
                 .build()
         }
     }
@@ -39,8 +45,39 @@ open class OrderController(
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    override fun createOrder(orderCreationRepresentation: OrderCreationRepresentation?): OrderRepresentation {
-        return OrderRepresentation()
+    override fun createOrder(@RequestBody order: OrderCreationRepresentation): OrderRepresentation {
+        val customer = customerAPI.getCustomerById(order.customerId)
+        val items = order.items.mapValues { catalogAPI.getProduct(it.key) }.map { it.value }.toList()
+        println(items)
+        val orderItems =
+            order.items.mapValues { OrderItem(productId = it.key, quantity = it.value) }.map { it.value }
+
+        val createdOrder = Order(
+            id = UUID.randomUUID().toString(),
+            customerId = customer.id,
+            items = orderItems.toList(),
+            price = items.sumByDouble { it.price },
+            status = "PENDING"
+        )
+
+        return builder()
+            .id(createdOrder.id)
+            .customer(customer)
+            .items(items.map {
+                OrderItemRepresentation.builder()
+                    .product(
+                        ProductRepresentation.builder()
+                            .id(it.id)
+                            .name(it.name)
+                            .price(it.price)
+                            .build()
+                    )
+                    .quantity(order.items[it.id])
+                    .build()
+            })
+            .total(createdOrder.price)
+            .orderStatus(OrderStatus.valueOf(createdOrder.status!!))
+            .build()
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
