@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
+import java.util.stream.Collectors
 
 @RestController
 open class OrderController(
@@ -47,8 +48,9 @@ open class OrderController(
     @ResponseStatus(HttpStatus.CREATED)
     override fun createOrder(@RequestBody order: OrderCreationRepresentation): OrderRepresentation {
         val customer = customerAPI.getCustomerById(order.customerId)
-        val items = order.items.mapValues { catalogAPI.getProduct(it.key) }.map { it.value }.toList()
-        println(items)
+
+        val items = order.items.keys.parallelStream().map {catalogAPI.getProduct(it) }.collect(Collectors.toList())
+
         val orderItems =
             order.items.mapValues { OrderItem(productId = it.key, quantity = it.value) }.map { it.value }
 
