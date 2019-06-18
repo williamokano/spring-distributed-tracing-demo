@@ -6,19 +6,14 @@ import io.opentracing.Scope
 import io.opentracing.ScopeManager
 import io.opentracing.Span
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Primary
 
 @org.springframework.context.annotation.Configuration
 open class JaegerOpentracingConfig {
-
     @Bean
-    @Primary
     open fun jaegerTracer(): io.opentracing.Tracer {
         val sampler = Configuration.SamplerConfiguration()
         sampler.withType(ProbabilisticSampler.TYPE).withParam(1)
-
         val reporter = Configuration.ReporterConfiguration()
-
         return Configuration("order-web")
             .withSampler(sampler)
             .withReporter(reporter)
@@ -33,7 +28,6 @@ class InheritableThreadLocalScope(
     private var wrapped: Span?,
     private var finishOnClose: Boolean
 ) : Scope {
-
     private var toRestore: InheritableThreadLocalScope? = scopeManager.tlsScope.get()
 
     init {
@@ -51,7 +45,6 @@ class InheritableThreadLocalScope(
     }
 
     override fun span(): Span? = wrapped
-
 }
 
 class InheritableThreadLocalScopeManager : ScopeManager {

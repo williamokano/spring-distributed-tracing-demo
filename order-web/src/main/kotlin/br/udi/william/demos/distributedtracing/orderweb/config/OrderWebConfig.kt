@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 @ComponentScan(basePackages = ["br.udi.william.demos.distributedtracing.orderweb.application"])
 @EntityScan(basePackages = ["br.udi.william.demos.distributedtracing.orderweb.application"])
 @EnableJpaRepositories("br.udi.william.demos.distributedtracing.orderweb.application")
-@Import(JaegerOpentracingConfig::class, FeignClientsConfig::class)
+@Import(JaegerOpentracingConfig::class, FeignClientsConfig::class, WebFilterConfig::class, ExecutorServiceConfig::class)
 open class OrderWebConfig

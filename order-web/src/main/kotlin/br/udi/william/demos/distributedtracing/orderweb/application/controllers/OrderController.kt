@@ -12,19 +12,22 @@ import br.udi.william.demos.distributedtracing.commons.commons.order.OrderRepres
 import br.udi.william.demos.distributedtracing.orderweb.application.models.Order
 import br.udi.william.demos.distributedtracing.orderweb.application.models.OrderItem
 import br.udi.william.demos.distributedtracing.orderweb.application.repositories.OrderRepository
+import br.udi.william.demos.distributedtracing.orderweb.application.util.ContextHolder
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
+import java.util.concurrent.ExecutorService
 import java.util.stream.Collectors
 
 @RestController
 open class OrderController(
     private val orderRepository: OrderRepository,
     private val customerAPI: CustomerAPI,
-    private val catalogAPI: CatalogAPI
+    private val catalogAPI: CatalogAPI,
+    private val executorService: ExecutorService
 ) : OrderAPI {
 
     @ResponseStatus(HttpStatus.OK)
@@ -49,7 +52,7 @@ open class OrderController(
     override fun createOrder(@RequestBody order: OrderCreationRepresentation): OrderRepresentation {
         val customer = customerAPI.getCustomerById(order.customerId)
 
-        val items = order.items.keys.parallelStream().map {catalogAPI.getProduct(it) }.collect(Collectors.toList())
+        val items = order.items.keys.parallelStream().map { catalogAPI.getProduct(it) }.collect(Collectors.toList())
 
         val orderItems =
             order.items.mapValues { OrderItem(productId = it.key, quantity = it.value) }.map { it.value }
@@ -61,6 +64,13 @@ open class OrderController(
             price = items.sumByDouble { it.price },
             status = "PENDING"
         )
+
+        println(ContextHolder.getContext())
+        println(Thread.currentThread().name)
+        executorService.submit {
+            println(Thread.currentThread().name)
+            println(ContextHolder.getContext())
+        }
 
         return builder()
             .id(createdOrder.id)
