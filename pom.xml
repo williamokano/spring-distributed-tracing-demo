@@ -26,7 +26,7 @@
     <properties>
         <kotlin.version>1.2.41</kotlin.version>
         <lombok.version>1.18.0</lombok.version>
-        <postgresql.version>42.1.4</postgresql.version>
+        <postgresql.version>42.4.1</postgresql.version>
         <liquibase.version>3.5.3</liquibase.version>
         <liquibase.maven.plugin>3.4.1</liquibase.maven.plugin>
         <modelmapper.version>2.0.0</modelmapper.version>
